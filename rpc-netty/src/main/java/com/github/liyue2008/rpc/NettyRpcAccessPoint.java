@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -52,11 +52,12 @@ public class NettyRpcAccessPoint implements RpcAccessPoint {
 
     private Transport createTransport(URI uri) {
         try {
-            return client.createTransport(new InetSocketAddress(uri.getHost(), uri.getPort()),30000L);
+            return client.createTransport(new InetSocketAddress(uri.getHost(), uri.getPort()), 30000L);
         } catch (InterruptedException | TimeoutException e) {
             throw new RuntimeException(e);
         }
     }
+
     @Override
     public synchronized <T> URI addServiceProvider(T service, Class<T> serviceClass) {
         serviceProviderRegistry.addServiceProvider(serviceClass, service);
@@ -71,7 +72,7 @@ public class NettyRpcAccessPoint implements RpcAccessPoint {
 
         }
         return () -> {
-            if(null != server) {
+            if (null != server) {
                 server.stop();
             }
         };
@@ -79,7 +80,7 @@ public class NettyRpcAccessPoint implements RpcAccessPoint {
 
     @Override
     public void close() {
-        if(null != server) {
+        if (null != server) {
             server.stop();
         }
         client.close();

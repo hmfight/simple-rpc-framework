@@ -72,7 +72,7 @@ RPC框架对外提供的所有服务定义在一个接口RpcAccessPoint中：
 /**
  * RPC框架对外提供的服务接口
  */
-public interface RpcAccessPoint extends Closeable{
+public interface RpcAccessPoint extends Closeable {
     /**
      * 客户端获取远程服务的引用
      * @param uri 远程服务地址
@@ -136,10 +136,10 @@ public interface HelloService {
 客户端：
 
 ```java
-URI uri = nameService.lookupService(serviceName);
-HelloService helloService = rpcAccessPoint.getRemoteService(uri, HelloService.class);
-String response = helloService.hello(name);
-logger.info("收到响应: {}.", response);
+URI uri=nameService.lookupService(serviceName);
+        HelloService helloService=rpcAccessPoint.getRemoteService(uri,HelloService.class);
+        String response=helloService.hello(name);
+        logger.info("收到响应: {}.",response);
 ```
 
 服务端：
@@ -160,16 +160,10 @@ public class HelloServiceImpl implements HelloService {
 
 ```java
 rpcAccessPoint.startServer();
-URI uri = rpcAccessPoint.addServiceProvider(helloService, HelloService.class);
-nameService.registerService(serviceName, uri);
+        URI uri=rpcAccessPoint.addServiceProvider(helloService,HelloService.class);
+        nameService.registerService(serviceName,uri);
 ```
 
 ## 项目结构
 
-Module | 说明
--- | --
-client | 例子：客户端
-server | 例子：服务端
-rpc-api | RPC框架接口
-hello-service-api | 例子：接口定义
-rpc-netty | 基于Netty实现的RPC框架
+Module | 说明 -- | -- client | 例子：客户端 server | 例子：服务端 rpc-api | RPC框架接口 hello-service-api | 例子：接口定义 rpc-netty | 基于Netty实现的RPC框架
